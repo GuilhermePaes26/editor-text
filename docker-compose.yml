@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Redis: O mensageiro que conectará seus microserviços
+  redis:
+    image: redis:alpine
+    container_name: redis_master
+    ports:
+      - '6379:6379'
+
+  # O microserviço que vamos criar agora
+  editor-service:
+    build: ./editor-service
+    container_name: editor_service
+    ports:
+      - '3001:3001'
+    depends_on:
+      - redis
+    volumes:
+      - ./editor-service:/usr/src/app
+      - /usr/src/app/node_modules
