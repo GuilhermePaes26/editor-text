@@ -1,21 +1,43 @@
 version: '3.8'
 
 services:
-  # Redis: O mensageiro que conectará seus microserviços
+  # Banco de Dados (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: editor_user
+      POSTGRES_PASSWORD: editor_password
+      POSTGRES_DB: editor_database
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Redis (Mensageria/Cache)
   redis:
     image: redis:alpine
     container_name: redis_master
     ports:
       - '6379:6379'
 
-  # O microserviço que vamos criar agora
+  # NestJS
   editor-service:
     build: ./editor-service
     container_name: editor_service
     ports:
       - '3001:3001'
     depends_on:
+      - db
       - redis
+    environment:
+      DATABASE_URL: 'postgresql://editor_user:editor_password@db:5432/editor_database?schema=public'
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     volumes:
       - ./editor-service:/usr/src/app
       - /usr/src/app/node_modules
+
+volumes:
+  pgdata:

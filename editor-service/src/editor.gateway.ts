@@ -1,30 +1,46 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   WebSocketGateway,
   SubscribeMessage,
   MessageBody,
   WebSocketServer,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { PrismaService } from './prisma/prisma.service';
 
-@WebSocketGateway(3001, { cors: { origin: '*' } })
-export class EditorGateway implements OnGatewayConnection, OnGatewayDisconnect {
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
+export class EditorGateway {
   @WebSocketServer()
   server!: Server;
 
-  handleConnection(client: Socket) {
-    console.log(`Cliente conectado: ${client.id}`);
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
-  handleDisconnect(client: Socket) {
-    console.log(`Cliente desconectado: ${client.id}`);
+  @SubscribeMessage('join-document')
+  handleJoin(@ConnectedSocket() client: Socket, @MessageBody() docId: string) {
+    client.join(docId);
+    console.log(`Cliente ${client.id} entrou no documento ${docId}`);
   }
 
   @SubscribeMessage('edit-content')
-  // Envio para outros
-  handleEvent(@MessageBody() data: string): string {
-    this.server.emit('content-updated', data);
-    return data;
+  async handleEdit(@MessageBody() data: { docId: string; content: string }) {
+    const document = await this.prisma.document.upsert({
+      where: { id: data.docId },
+      update: { content: data.content },
+      create: {
+        id: data.docId,
+        content: data.content,
+        title: 'Documento Colaborativo',
+      },
+    });
+
+    this.server.to(data.docId).emit('content-updated', document);
   }
 }
