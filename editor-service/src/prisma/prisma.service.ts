@@ -23,9 +23,9 @@ export class PrismaService
   async onModuleInit() {
     try {
       await this.$connect();
-      console.log('✅ Conectado ao PostgreSQL com sucesso!');
+      console.log('Conectado ao PostgreSQL');
     } catch (error) {
-      console.error('❌ Erro na conexão com o banco:', error);
+      console.error('ERRO ao concetar com BD', error);
     }
   }
 
