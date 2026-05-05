@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -24,9 +26,20 @@ export class EditorGateway {
   constructor(private readonly prisma: PrismaService) {}
 
   @SubscribeMessage('join-document')
-  handleJoin(@ConnectedSocket() client: Socket, @MessageBody() docId: string) {
+  async handleJoin(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() docId: string,
+  ) {
     client.join(docId);
     console.log(`Cliente ${client.id} entrou no documento ${docId}`);
+
+    const document = await this.prisma.document.findUnique({
+      where: { id: docId },
+    });
+    if (document) {
+      client.emit('load-document', document.content);
+      console.log(`doc init enviado para o cliente ${client.id}`);
+    }
   }
 
   @SubscribeMessage('edit-content')
