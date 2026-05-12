@@ -4,7 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EditorGateway } from './editor.gateway';
 import { PrismaService } from './prisma/prisma.service';
-import { ClientsModule, Transport } from '@nestjs/microservices'; // Importe os módulos de microserviços
+import { ClientsModule, Transport } from '@nestjs/microservices'; // Importe os módulos de microserviços a
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices'; // Importe os 
         name: 'AUTH_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: 'localhost',
+          host: 'host.docker.internal',
           port: 3002,
         },
       },
