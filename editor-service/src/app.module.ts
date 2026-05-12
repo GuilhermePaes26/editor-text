@@ -13,7 +13,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices'; // Importe os 
         name: 'AUTH_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: 'host.docker.internal',
+          host: 'auth-service',
           port: 3002,
         },
       },
