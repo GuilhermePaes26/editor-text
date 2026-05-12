@@ -22,6 +22,20 @@ services:
     ports:
       - '6379:6379'
 
+  # AUTH SERVICE
+  auth-service:
+    build: ./auth-service
+    container_name: auth_service
+    ports:
+      - '3002:3002'
+    depends_on:
+      - redis
+      - db
+    environment:
+      DATABASE_URL: 'postgresql://editor_user:editor_password@db:5432/editor_database?schema=public'
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
   # NestJS
   editor-service:
     build: ./editor-service
