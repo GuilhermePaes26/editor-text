@@ -16,4 +16,8 @@ export class AppController {
       this.authClient.send({ cmd: 'register' }, data),
     );
   }
+  @Post('login')
+  login(@Body() data: any) {
+    return this.authClient.send({ cmd: 'login' }, data);
+  }
 }
