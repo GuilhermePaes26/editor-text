@@ -6,6 +6,7 @@ import { EditorGateway } from './editor.gateway';
 import { PrismaService } from './prisma/prisma.service';
 import { ClientsModule, Transport } from '@nestjs/microservices'; // Importe os módulos de microserviços a
 import { AuthModule } from './auth/auth.module';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthModule } from './auth/auth.module';
       },
     ]),
     AuthModule,
+    DocumentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, EditorGateway, PrismaService],
