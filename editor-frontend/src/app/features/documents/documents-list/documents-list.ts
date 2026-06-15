@@ -1,11 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { DocumentsService } from '../../../core/services/documents.service';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-documents-list',
-  imports: [],
+  selector: 'app-documents',
   templateUrl: './documents-list.html',
+  imports: [RouterLink],
   styleUrl: './documents-list.scss',
 })
-export class DocumentsList {
+export class Documents implements OnInit {
+  private documentsService = inject(DocumentsService);
+  private router = inject(Router);
 
+  documents: any[] = [];
+
+  ngOnInit() {
+    this.loadDocuments();
+  }
+
+  loadDocuments() {
+    this.documentsService.getDocuments().subscribe({
+      next: (docs) => {
+        this.documents = docs;
+      },
+    });
+  }
+
+  createDocument() {
+    this.documentsService.createDocument('Novo Documento').subscribe({
+      next: (doc) => {
+        this.router.navigate(['/editor', doc.id]);
+      },
+    });
+  }
+
+  openDocument(id: string) {
+    this.router.navigate(['/editor', id]);
+  }
 }
