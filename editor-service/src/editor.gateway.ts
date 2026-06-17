@@ -70,7 +70,7 @@ export class EditorGateway implements OnGatewayConnection, OnGatewayDisconnect {
     });
 
     if (document) {
-      client.emit('load-document', document.content);
+      client.emit('load-document', document);
 
       console.log(`doc init enviado para o cliente ${client.id}`);
     }

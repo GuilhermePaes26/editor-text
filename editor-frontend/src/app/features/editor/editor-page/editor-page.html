@@ -1,1 +1,5 @@
-<p>editor-page works!</p>
+<div class="editor-container">
+  <h1>Documento: {{ docTitle || "Carregando..." }}</h1>
+
+  <textarea [(ngModel)]="content" (input)="onContentChange()"> </textarea>
+</div>
