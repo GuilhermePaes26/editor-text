@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { EditorSocketService } from '../../../core/services/editor-socket.service';
 import { DocumentsService } from '../../../core/services/documents.service';
 
 @Component({
   selector: 'app-editor-page',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './editor-page.html',
   styleUrl: './editor-page.scss',
 })
