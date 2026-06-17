@@ -1,25 +1,39 @@
 <div class="documents-page">
   <header class="header">
-    <h1>Editor Colaborativo</h1>
+    <div class="brand">
+      <span class="logo">📄</span>
+      <h1>Editor Colaborativo</h1>
+    </div>
   </header>
 
-  <section class="new-document">
-    <button (click)="createDocument()">+ Novo Documento</button>
-  </section>
+  <main class="content">
+    <section class="documents-section">
+      <h2>Meus Documentos</h2>
 
-  <section class="documents-section">
-    <h2>Meus Documentos</h2>
+      <div class="documents-grid">
+        <div class="new-document-card" (click)="createDocument()">
+          <div class="plus">+</div>
+          <span>Novo Documento</span>
+        </div>
 
-    <div class="documents-grid">
-      @for (doc of documents; track doc.id) {
-        <a class="document-card" [routerLink]="['/editor', doc.id]">
-          <div class="preview"></div>
+        @for (doc of documents; track doc.id) {
+          <a class="document-card" [routerLink]="['/editor', doc.id]">
+            <div class="preview">
+              <div class="fake-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
 
-          <div class="title">
-            {{ doc.title }}
-          </div>
-        </a>
-      }
-    </div>
-  </section>
+            <div class="card-footer">
+              <span class="file-icon">📄</span>
+              <span class="title">{{ doc.title }}</span>
+            </div>
+          </a>
+        }
+      </div>
+    </section>
+  </main>
 </div>

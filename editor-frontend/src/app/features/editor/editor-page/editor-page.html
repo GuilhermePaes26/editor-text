@@ -1,5 +1,19 @@
-<div class="editor-container">
-  <h1>Documento: {{ docTitle || "Carregando..." }}</h1>
+<div class="editor-page">
+  <header class="editor-header">
+    <div class="document-info">
+      <span class="logo">📄</span>
+      <h1>{{ docTitle }}</h1>
+    </div>
 
-  <textarea [(ngModel)]="content" (input)="onContentChange()"> </textarea>
+    <span class="status">✓ Salvo</span>
+  </header>
+
+  <main class="editor-content">
+    <textarea
+      [(ngModel)]="content"
+      (input)="onContentChange()"
+      placeholder="Comece a escrever..."
+    >
+    </textarea>
+  </main>
 </div>
