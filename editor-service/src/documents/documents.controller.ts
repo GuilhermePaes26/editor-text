@@ -2,7 +2,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Param, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  UseGuards,
+  Patch,
+} from '@nestjs/common';
 
 import { DocumentsService } from './documents.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -25,5 +33,10 @@ export class DocumentsController {
   @Post()
   create(@Body() body: { title: string }) {
     return this.documentsService.create(body.title);
+  }
+
+  @Patch(':id/title')
+  updateTitle(@Param('id') id: string, @Body() body: { title: string }) {
+    return this.documentsService.updateTitle(id, body.title);
   }
 }

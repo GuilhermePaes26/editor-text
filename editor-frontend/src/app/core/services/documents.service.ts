@@ -18,4 +18,9 @@ export class DocumentsService {
       title,
     });
   }
+  updateTitle(id: string, title: string) {
+    return this.http.patch(`${this.api}/documents/${id}/title`, {
+      title,
+    });
+  }
 }

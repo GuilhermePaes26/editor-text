@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { EditorSocketService } from '../../../core/services/editor-socket.service';
+import { DocumentsService } from '../../../core/services/documents.service';
 
 @Component({
   selector: 'app-editor-page',
@@ -17,6 +18,7 @@ export class EditorPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly socketService: EditorSocketService,
+    private readonly documentsService: DocumentsService,
   ) {}
 
   ngOnInit() {
@@ -45,12 +47,14 @@ export class EditorPageComponent implements OnInit, OnDestroy {
       this.content = document.content;
     });
   }
-
   onContentChange() {
     this.socketService.editContent(this.docId, this.content);
   }
 
   ngOnDestroy() {
     this.socketService.disconnect();
+  }
+  onTitleChange() {
+    this.documentsService.updateTitle(this.docId, this.docTitle).subscribe();
   }
 }

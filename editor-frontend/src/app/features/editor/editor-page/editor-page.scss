@@ -1,3 +1,81 @@
+// :host {
+//   display: block;
+//   min-height: 100vh;
+//   background: #f1f3f4;
+//   font-family: Inter, "Segoe UI", sans-serif;
+// }
+
+// .editor-page {
+//   min-height: 100vh;
+// }
+
+// .editor-header {
+//   height: 64px;
+//   background: white;
+//   border-bottom: 1px solid #e5e7eb;
+
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+
+//   padding: 0 32px;
+
+//   position: sticky;
+//   top: 0;
+//   z-index: 10;
+// }
+
+// .document-info {
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+
+//   h1 {
+//     margin: 0;
+//     font-size: 1.2rem;
+//     font-weight: 500;
+//     color: #202124;
+//   }
+// }
+
+// .logo {
+//   font-size: 1.5rem;
+// }
+
+// .status {
+//   color: #34a853;
+//   font-size: 0.9rem;
+//   font-weight: 500;
+// }
+
+// .editor-content {
+//   display: flex;
+//   justify-content: center;
+//   padding: 40px;
+// }
+
+// textarea {
+//   width: 850px;
+//   min-height: calc(100vh - 160px);
+
+//   padding: 60px;
+
+//   border: none;
+//   border-radius: 8px;
+
+//   background: white;
+
+//   font-size: 16px;
+//   line-height: 1.8;
+
+//   resize: none;
+//   outline: none;
+
+//   box-shadow:
+//     0 1px 3px rgba(0, 0, 0, 0.08),
+//     0 4px 12px rgba(0, 0, 0, 0.05);
+// }
+
 :host {
   display: block;
   min-height: 100vh;
@@ -11,14 +89,15 @@
 
 .editor-header {
   height: 64px;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   padding: 0 32px;
+
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
 
   position: sticky;
   top: 0;
@@ -28,50 +107,80 @@
 .document-info {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  h1 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #202124;
-  }
+  gap: 16px;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.document-title {
+  border: none;
+  background: transparent;
+  font-family: Inter, "Segoe UI", sans-serif;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #202124;
+
+  padding: 8px 12px;
+  border-radius: 6px;
+
+  min-width: 280px;
+  max-width: 600px;
+
+  transition: all 0.2s ease;
+}
+
+.document-title:hover {
+  background: #f1f3f4;
+}
+
+.document-title:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 0 2px #1a73e8;
+}
+
+.document-title::placeholder {
+  color: #80868b;
 }
 
 .status {
-  color: #34a853;
-  font-size: 0.9rem;
+  color: #5f6368;
+  font-size: 13px;
   font-weight: 500;
 }
 
 .editor-content {
   display: flex;
   justify-content: center;
-  padding: 40px;
+  padding: 48px 24px;
 }
 
 textarea {
   width: 850px;
   min-height: calc(100vh - 160px);
 
-  padding: 60px;
+  padding: 72px 80px;
 
   border: none;
   border-radius: 8px;
 
   background: white;
 
+  color: #202124;
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.9;
 
   resize: none;
   outline: none;
 
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    0 4px 12px rgba(0, 0, 0, 0.05);
+    0 1px 2px rgba(60, 64, 67, 0.1),
+    0 2px 6px rgba(60, 64, 67, 0.15);
+}
+
+textarea::placeholder {
+  color: #9aa0a6;
 }

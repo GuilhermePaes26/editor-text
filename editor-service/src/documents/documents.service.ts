@@ -27,4 +27,10 @@ export class DocumentsService {
       },
     });
   }
+  async updateTitle(id: string, title: string) {
+    return this.prisma.document.update({
+      where: { id },
+      data: { title },
+    });
+  }
 }
