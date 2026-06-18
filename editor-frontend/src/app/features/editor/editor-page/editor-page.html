@@ -1,11 +1,19 @@
 <div class="editor-page">
   <header class="editor-header">
     <div class="document-info">
-      <span class="logo">📄</span>
-      <h1>{{ docTitle }}</h1>
+      <a routerLink="/documents" class="logo-link">
+        <span class="logo">📄</span>
+      </a>
+      <input
+        class="document-title"
+        [(ngModel)]="docTitle"
+        (blur)="onTitleChange()"
+        (keydown.enter)="onTitleChange()"
+        placeholder="Documento sem título"
+      />
     </div>
 
-    <span class="status">✓ Salvo</span>
+    <span class="status">Última alteração salva</span>
   </header>
 
   <main class="editor-content">
@@ -13,7 +21,6 @@
       [(ngModel)]="content"
       (input)="onContentChange()"
       placeholder="Comece a escrever..."
-    >
-    </textarea>
+    ></textarea>
   </main>
 </div>

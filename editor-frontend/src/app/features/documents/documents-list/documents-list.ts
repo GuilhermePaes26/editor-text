@@ -15,6 +15,13 @@ export class Documents implements OnInit {
 
   documents: any[] = [];
 
+  menuOpen = false;
+
+  userEmail = localStorage.getItem('userEmail') ?? '';
+
+  userName = this.userEmail.split('@')[0];
+
+  userInitials = this.userName ? this.userName.charAt(0).toUpperCase() : 'U';
   ngOnInit() {
     this.loadDocuments();
   }
@@ -37,5 +44,11 @@ export class Documents implements OnInit {
 
   openDocument(id: string) {
     this.router.navigate(['/editor', id]);
+  }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
+
+    this.router.navigate(['/login']);
   }
 }

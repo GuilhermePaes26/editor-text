@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { EditorSocketService } from '../../../core/services/editor-socket.service';
+import { DocumentsService } from '../../../core/services/documents.service';
 
 @Component({
   selector: 'app-editor-page',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './editor-page.html',
   styleUrl: './editor-page.scss',
 })
@@ -17,6 +19,7 @@ export class EditorPageComponent implements OnInit, OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly socketService: EditorSocketService,
+    private readonly documentsService: DocumentsService,
   ) {}
 
   ngOnInit() {
@@ -45,12 +48,14 @@ export class EditorPageComponent implements OnInit, OnDestroy {
       this.content = document.content;
     });
   }
-
   onContentChange() {
     this.socketService.editContent(this.docId, this.content);
   }
 
   ngOnDestroy() {
     this.socketService.disconnect();
+  }
+  onTitleChange() {
+    this.documentsService.updateTitle(this.docId, this.docTitle).subscribe();
   }
 }
