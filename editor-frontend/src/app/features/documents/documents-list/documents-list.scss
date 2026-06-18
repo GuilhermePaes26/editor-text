@@ -16,6 +16,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 40px;
 }
@@ -170,4 +171,102 @@
 .title {
   color: #202124;
   font-weight: 500;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  transition: 0.2s;
+}
+
+.user-button:hover {
+  background: #f1f3f4;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background: #1a73e8;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+}
+
+.user-name {
+  color: #202124;
+  font-weight: 500;
+}
+
+.dropdown {
+  position: absolute;
+
+  top: 60px;
+  right: 0;
+
+  width: 240px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  border: 1px solid #e5e7eb;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #5f6368;
+
+  margin-bottom: 12px;
+
+  word-break: break-word;
+}
+
+.logout-btn {
+  width: 100%;
+
+  border: none;
+
+  background: #ef4444;
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
 }

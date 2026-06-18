@@ -4,6 +4,28 @@
       <span class="logo">📄</span>
       <h1>Editor Colaborativo</h1>
     </div>
+
+    <div class="user-menu">
+      <button class="user-button" (click)="menuOpen = !menuOpen">
+        <span class="user-avatar">
+          {{ userInitials }}
+        </span>
+
+        <span class="user-name">
+          {{ userName }}
+        </span>
+      </button>
+
+      @if (menuOpen) {
+        <div class="dropdown">
+          <div class="user-email">
+            {{ userEmail }}
+          </div>
+
+          <button class="logout-btn" (click)="logout()">Sair</button>
+        </div>
+      }
+    </div>
   </header>
 
   <main class="content">
